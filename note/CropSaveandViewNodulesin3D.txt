@@ -1,0 +1,4 @@
+https://www.kaggle.com/rodenluo/crop-save-and-view-nodules-in-3d
+脚本位置
+
+import glob 这glob 用来查找文件的，可以模糊匹配查找 指定路径下面的文件

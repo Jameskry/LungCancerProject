@@ -1,0 +1,29 @@
+una16 的数据介绍：
+官方网址是： https://luna16.grand-challenge.org/data/
+
+    The reference standard of our challenge consists of all nodules >= 3 mm accepted by at least 3 out of 4 radiologists.
+    Annotations that are not included in the reference standard (non-nodules, nodules < 3 mm, and nodules annotated by
+    only 1 or 2 radiologists) are referred as irrelevant findings.
+    The list of irrelevant findings is provided inside the evaluation script package (annotations_excluded.csv).
+
+
+    annotations.csv: csv file that contains the annotations used as reference standard for the 'nodule detection' track
+    sampleSubmission.csv: an example of a submission file in the correct format
+    candidates_V2.csv: csv file that contains the candidate locations for the ‘false positive reduction’ track
+
+/Users/wangbing/MyProjects/LungCancer/lungData/luna16Data/CSVFILES/annotations.csv
+/Users/wangbing/MyProjects/LungCancer/lungData/luna16Data/evaluationScript/annotations/annotations.csv
+这两个文件是一样的。
+/Users/wangbing/MyProjects/LungCancer/lungData/luna16Data/evaluationScript/annotations/annotations_excluded.csv
+这个文件中包含了 所有的结节，但有的是 -1 表是 这个是 非结节的，有的有半径的 表示是 是 结节（但是 也不是正样本的？？）
+Each radiologist marked lesions they identified as non-nodule, nodule < 3 mm, and nodules >= 3 mm.
+See this publication for the details of the annotation process.
+The reference standard of our challenge consists of all nodules >= 3 mm accepted by at least 3 out of 4 radiologists.
+Annotations that are not included in the reference standard
+(non-nodules, nodules < 3 mm, and nodules annotated by only 1 or 2 radiologists) are referred as irrelevant findings.
+The list of irrelevant findings is provided inside the evaluation script package (annotations_excluded.csv).
+
+也就是说annotations_excluded.csv 中的 有半径的也是 结节 但是不能完全确定为正样本。
+
+现在的问题是？
+    该怎么确定 负样本的 半径问题？？？？

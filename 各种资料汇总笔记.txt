@@ -1,0 +1,27 @@
+kaggle 上第二名的资料：
+    https://github.com/dhammack/DSB2017
+    pdf 文件是：/Users/wangbing/Downloads/dsb_2017_daniel_hammack.pdf
+    github 上项目：/Users/wangbing/Downloads/downLoadsLungCancerFiles/DSB2017-master
+
+dsb-2017
+    /Users/wangbing/Downloads/downLoadsLungCancerFiles/dsb-2017-master
+    这个是项目的本地地址
+    https://github.com/anlthms/dsb-2017 这个是github的地址
+
+
+
+http://juliandewit.github.io/kaggle-ndsb2017/
+kaggle data bowl 2017
+
+every voxel represented an volume of 1x1x1 mm ??? 这个句话该怎么理解呢？？
+
+https://www.kaggle.com/c/data-science-bowl-2017#tutorial
+/Users/wangbing/Downloads/downLoadsLungCancerFiles
+本地的GitHub 下载下来的地址是： /Users/wangbing/Downloads/downLoadsLungCancerFiles/DSB3Tutorial-master
+这个是 kaggle 上指导说明的教程
+
+
+kaggle data science bowl 2017 第一名：
+https://github.com/lfz/DSB2017
+/Users/wangbing/Downloads/downLoadsLungCancerFiles/DSB2017-master
+

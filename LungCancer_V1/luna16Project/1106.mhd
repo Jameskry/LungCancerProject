@@ -1,0 +1,7 @@
+ObjectType = Image
+NDims = 3
+BinaryData = True
+BinaryDataByteOrderMSB = False
+DimSize = 19 19 19
+ElementType = MET_FLOAT
+ElementDataFile = 1106.raw

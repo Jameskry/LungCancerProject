@@ -1,0 +1,65 @@
+1: 先做 找到结节 这个步骤
+    根据 luna16的数据找到结节数据
+
+6-17
+luna16 的数据介绍：
+官方网址是： https://luna16.grand-challenge.org/data/
+
+    The reference standard of our challenge consists of all nodules >= 3 mm accepted by at least 3 out of 4 radiologists.
+    Annotations that are not included in the reference standard (non-nodules, nodules < 3 mm, and nodules annotated by
+    only 1 or 2 radiologists) are referred as irrelevant findings.
+    The list of irrelevant findings is provided inside the evaluation script package (annotations_excluded.csv).
+
+
+    annotations.csv: csv file that contains the annotations used as reference standard for the 'nodule detection' track
+    sampleSubmission.csv: an example of a submission file in the correct format
+    candidates_V2.csv: csv file that contains the candidate locations for the ‘false positive reduction’ track
+
+/Users/wangbing/MyProjects/LungCancerProjectGithub/LungCancer_V1/luna16Project/CropSaveAndViewNodulesIn3D.py
+这个程序好好看看，这个程序实现了 根据 提供的csv 文件扣出结节的操作。
+对于对结节 进行建模预测的：
+    正负样本：
+            正样本就是 ：/Users/wangbing/MyProjects/LungCancer/lungData/luna16Data/CSVFILES/annotations.csv
+                        这个csv 文件中的结节就是正样本了
+                        还可以进行数据扩增操作
+
+            负样本是：/Users/wangbing/MyProjects/LungCancer/lungData/luna16Data/CSVFILES/candidates.csv
+                       这个csv 文件中的，class 是 0 的可以用来用负样本
+                       但是 这个里面的文件没有 半径这个值，这该怎么办
+                       class == 0
+                       class == 1 表示什么意思？？？
+
+明天的任务是：
+    /Users/wangbing/MyProjects/LungCancerProjectGithub/LungCancer_V1/luna16Project/CropSaveAndViewNodulesIn3D.py
+    完全理解搞定这个脚本
+    利用这个脚本 整理出来 结节的数据 对于每个结节 单独保存起来
+    看看 对于负样本 该怎么搞定，因为没有半径值，那么该怎么确定 负样本结节呢？
+    建立 3DCNN 网络
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
