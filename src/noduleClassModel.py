@@ -147,9 +147,89 @@ def dataProcessFun():
             tempAllNodulesY.append(np.array([0,1])) #[0,1]--y  表示负样本
     return tempAllNodulesX,tempAllNodulesY
 
+def dataProcessFunAddDataAugmentation():
+    positiveNoduleNpyFileList = np.load(os.path.join(config.luna6DataParamDict['noduleSavaBasePath'],
+                                                     config.luna6DataParamDict['positiveNoduleFileNpy']))
+    newAddPositiveNoduleNpyFileList = np.load(os.path.join(config.luna6DataParamDict['noduleSavaBasePath'],
+                                                           config.luna6DataParamDict['newPositiveNoduleNpyFileListInExcludeFile']))
+    newNegativeNoduleNpyFileList = np.load(os.path.join(config.luna6DataParamDict['noduleSavaBasePath'],
+                                                        config.luna6DataParamDict['newNegativeNoduleNpyFileListAfterReduceNewPositive']))
+    # 因为负样本太多了，进行下采样，使正负样本保持同样的大小
+    # 对于正样本来说，进行是数据扩增技术，也就是对正样本的 nodule ,进行了 np.transpose ??
+    # 这个还没有用到：
+    # 目前只是 从 annotation_exclude 中 diameter_mm != -1 的这一部分 由原来的认为是 负样本，现在当成正样本了
+
+
+    positiveNoduleList = np.append(positiveNoduleNpyFileList,newAddPositiveNoduleNpyFileList)
+    negativeNoduleList = newNegativeNoduleNpyFileList
+    if (negativeNoduleList.shape[0] > positiveNoduleList.shape[0]):
+        negativeNoduleNpyFileListRandomSampleN = random.sample(negativeNoduleList.tolist(),positiveNoduleList.shape[0])
+    else:
+        negativeNoduleNpyFileListRandomSampleN = negativeNoduleList
+    tempAllNodulesX = []
+    tempAllNodulesY = []
+    for i_file in positiveNoduleList:
+        tempNodule = np.load(i_file)
+        shapeOneDir = int(config.luna6DataParamDict['noduleSemidiameter'])*2 +1
+        if(tempNodule.shape == (shapeOneDir,shapeOneDir,shapeOneDir)):
+            tempAllNodulesX.append(dataNormalization(np.load(i_file)))
+            tempAllNodulesY.append(np.array([1,0])) # [1,0]--y  表示正样本
+    for i_file in negativeNoduleNpyFileListRandomSampleN:
+        tempNodule = np.load(i_file)
+        shapeOneDir = int(config.luna6DataParamDict['noduleSemidiameter'])*2 +1
+        if (tempNodule.shape == (shapeOneDir, shapeOneDir, shapeOneDir)):
+            tempAllNodulesX.append(dataNormalization(np.load(i_file)))
+            tempAllNodulesY.append(np.array([0,1])) #[0,1]--y  表示负样本
+    return tempAllNodulesX, tempAllNodulesY
+
+
+def dataProcessFunAddDataAugmentationUsedNpTransposeToPositiveNodule():
+    positiveNoduleNpyFileList = np.load(os.path.join(config.luna6DataParamDict['noduleSavaBasePath'],
+                                                     config.luna6DataParamDict['positiveNoduleFileNpy']))
+    newAddPositiveNoduleNpyFileList = np.load(os.path.join(config.luna6DataParamDict['noduleSavaBasePath'],
+                                                           config.luna6DataParamDict[
+                                                               'newPositiveNoduleNpyFileListInExcludeFile']))
+    newNegativeNoduleNpyFileList = np.load(os.path.join(config.luna6DataParamDict['noduleSavaBasePath'],
+                                                        config.luna6DataParamDict[
+                                                            'newNegativeNoduleNpyFileListAfterReduceNewPositive']))
+    # 因为负样本太多了，进行下采样，使正负样本保持同样的大小
+    # 对于正样本来说，进行是数据扩增技术，也就是对正样本的 nodule ,进行了 np.transpose
+    # 1:从 annotation_exclude 中 diameter_mm != -1 的这一部分 由原来的认为是 负样本，现在当成正样本了
+    # 2:最 positiveNoduleNpyFileList + newAddPositiveNoduleNpyFileList 这些正样本进行 转置 然后作为新的正样本
+
+
+    positiveNoduleList = np.append(positiveNoduleNpyFileList, newAddPositiveNoduleNpyFileList)
+    negativeNoduleList = newNegativeNoduleNpyFileList
+    if (negativeNoduleList.shape[0] > positiveNoduleList.shape[0]*2):
+        negativeNoduleNpyFileListRandomSampleN = random.sample(negativeNoduleList.tolist(), positiveNoduleList.shape[0]*2)
+    else:
+        negativeNoduleNpyFileListRandomSampleN = negativeNoduleList
+    tempAllNodulesX = []
+    tempAllNodulesY = []
+    for i_file in positiveNoduleList:
+        tempNodule = np.load(i_file)
+        shapeOneDir = int(config.luna6DataParamDict['noduleSemidiameter']) * 2 + 1
+        if (tempNodule.shape == (shapeOneDir, shapeOneDir, shapeOneDir)):
+            tempNoduelNormalization = dataNormalization(np.load(i_file))
+            tempAllNodulesX.append(tempNoduelNormalization)
+            tempAllNodulesY.append(np.array([1, 0]))  # [1,0]--y  表示正样本
+            #利用对这些原来的正样本 进行转置 然后做也作为 新的正样本
+            tempAllNodulesX.append(np.transpose(tempNoduelNormalization))
+            tempAllNodulesY.append(np.array([1, 0]))  # [1,0]--y  表示正样本
+
+    for i_file in negativeNoduleNpyFileListRandomSampleN:
+        tempNodule = np.load(i_file)
+        shapeOneDir = int(config.luna6DataParamDict['noduleSemidiameter']) * 2 + 1
+        if (tempNodule.shape == (shapeOneDir, shapeOneDir, shapeOneDir)):
+            tempAllNodulesX.append(dataNormalization(np.load(i_file)))
+            tempAllNodulesY.append(np.array([0, 1]))  # [0,1]--y  表示负样本
+    return tempAllNodulesX, tempAllNodulesY
+
 def main():
-    allNodulesX , allNodulesY = dataProcessFun()
-    noduleClassModel3Fun(allNodulesX,allNodulesY,isTest=False,allEpoch=200)
+    #allNodulesX , allNodulesY = dataProcessFun() # 原来是正负样本
+    #allNodulesX, allNodulesY = dataProcessFunAddDataAugmentation() # 将 负样本一部分转换为正样本
+    allNodulesX, allNodulesY = dataProcessFunAddDataAugmentationUsedNpTransposeToPositiveNodule() # 利用转置对正样本进行转置
+    noduleClassModel3Fun(allNodulesX,allNodulesY,isTest=False,allEpoch=20)
 
 
 if __name__ == '__main__':

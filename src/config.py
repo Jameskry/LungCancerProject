@@ -2,6 +2,7 @@
 """
 这个程序是用来存放 路径和更好参数信息
 """
+import os
 
 luna6DataParamDict={
     "mhdFileBasePath":"/Users/wangbing/MyProjects/LungCancer/lungData/luna16Data",
@@ -11,6 +12,10 @@ luna6DataParamDict={
     "noduleSavaBasePath":"/Users/wangbing/MyProjects/LungCancer/lungData/luna16Data/luna16ExampleDataNoduleSaveBasePath",
     "nodulePositiveSaveBasePath":"/Users/wangbing/MyProjects/LungCancer/lungData/luna16Data/luna16ExampleDataNoduleSaveBasePath/positiveNodules",
     "noduleNegativeSaveBasePath":"/Users/wangbing/MyProjects/LungCancer/lungData/luna16Data/luna16ExampleDataNoduleSaveBasePath/negativeNodules",
+    "positiveNoduleFileNpy":"positiveNoduleNpyFileList.npy",
+    "negativeNoduleFileNpy":"negativeNoduleNpyFileList.npy",
+    "newPositiveNoduleNpyFileListInExcludeFile":"newPositiveNoduleNpyFileListInExcludeFile.npy",
+    "newNegativeNoduleNpyFileListAfterReduceNewPositive":"newNegativeNoduleNpyFileListAfterReduceNewPositive.npy",
     "noduleSaveFileNameSepFlag":"_@#$_",
     "noduleSemidiameter":"9",
     "voxelValueMax":"400",
